@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/screens-demo" mode="merge"/>
+    <filter root="/content/screens-demo" mode="merge"/>
+    <filter root="/content/dam/screens-demo" mode="merge"/>
+    <filter root="/content/experience-fragments/screens-demo" mode="merge"/>
+    <filter root="/conf/global/settings/workflow/models" mode="merge" />
+</workspaceFilter>

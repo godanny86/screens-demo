@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:designPath="/libs/settings/wcm/designs/default"
+        cq:lastModified="{Date}2019-12-04T16:58:46.752-08:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/workflow/templates/model"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Screens Asset Processing"
+        sling:resourceType="cq/workflow/components/pages/model">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <watermarkprocess
+                jcr:created="{Date}2019-12-04T15:43:22.375-08:00"
+                jcr:createdBy="admin"
+                jcr:description="A process to add a watermark to an asset. Provides various configuration arguments."
+                jcr:lastModified="{Date}2019-12-04T16:58:46.746-08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Add Watermark"
+                sling:resourceType="dam/components/workflow/watermarkprocess">
+                <metaData
+                    jcr:lastModified="{Date}2019-12-04T16:58:46.746-08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    opacity="100"
+                    orientation="0"
+                    position="CENTER"
+                    PROCESS="com.day.cq.dam.core.process.WaterMarkProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    size="100"
+                    text="Powered by AEM Screens"/>
+            </watermarkprocess>
+            <thumbnailprocess
+                jcr:created="{Date}2014-07-15T00:55:55.869+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail."
+                jcr:lastModified="{Date}2016-08-04T20:18:39.069+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Process Thumbnails"
+                sling:resourceType="dam/components/workflow/thumbnailprocess"
+                PROCESS="com.day.cq.dam.core.impl.process.ThumbnailProcess"
+                PROCESS_AUTO_ADVANCE="true">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    CONFIGS="[140:100:false,48:48:false,319:319:false]"
+                    CREATE_FPO_MIMETYPES="[image/pjpeg,image/jpeg,image/jpg,image/gif,image/x-png,image/tiff,image/png,application/x-photoshop,application/photoshop,image/vnd.adobe.photoshop,application/vnd.adobe.photoshop,image/bmp,image/x-tiff]"
+                    FPO_QUALITY="10"
+                    HEIGHT="1280"
+                    MIME_TYPE="image/jpeg"
+                    MIMETYPE="image/jpeg"
+                    PROCESS="com.day.cq.dam.core.impl.process.ThumbnailProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    QUALITY="90"
+                    SKIP="[audio/mpeg,video/(.*)]"
+                    WIDTH="1280"/>
+            </thumbnailprocess>
+            <noopprocess
+                jcr:created="{Date}2019-12-04T16:52:54.359-08:00"
+                jcr:createdBy="admin"
+                jcr:description="A no operation process"
+                jcr:lastModified="{Date}2019-12-04T16:52:54.359-08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="No Operation"
+                sling:resourceType="cq/workflow/components/workflow/noopprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="/libs/workflow/scripts/noop.ecma"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </noopprocess>
+        </flow>
+    </jcr:content>
+</jcr:root>
