@@ -85,6 +85,12 @@ Bundle-DocURL:
     </build>
 
     <dependencies>
+        <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.annotations</artifactId>
+                <version>1.12.0</version>
+                <scope>provided</scope>
+        </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
             <groupId>org.osgi</groupId>
