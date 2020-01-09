@@ -1,6 +1,6 @@
-# Sample AEM project template
+# Screens Demo Project
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
+This is a project template for AEM-based applications. It is intended as a best-practice set of examples.
 
 ## Modules
 
@@ -45,6 +45,23 @@ Or to deploy only the bundle to the author, run
 
 1. Upload and install `screens-demo.all-1.0-SNAPSHOT.zip` via CRX Package manager.
 
+### Quick Use
+
+1. Navigate to **Assets** > **Files** > **Screens Demo**
+2. Upload a new image to the folder.
+3. The thumbnail of the image in the center should read **Powered by AEM Screens**.
+4. View the properties of the **Screens Demo** folder. You should see a metadata property for *Channel to Assign*:
+
+    ![Folder Metadata](./docs/images/folder-metadata-channel.png)
+
+    This Represents the channel that the asset will be added.
+
+5. Navigate to **Screens** > **We.Retail In-Store** > **Channels** > **Idle Channel**
+
+    ![Idle Channel](docs/images/idle-channel.png)
+
+6. Open the **Ide Channel** for editing. You should see the image from the DAM uploaded...
+
 ### Workflow
 
 There are two workflows that are used:
@@ -56,6 +73,13 @@ There are two workflows that are used:
 2. The **Screens Asset Processing** workflow first checks to see if the folder the asset was uploaded in has a screens channel specified in the folder metadata. If it does:
     1. Apply a watermark to the original image
     2. Add a reference and transition of the asset to the Screens Channel specified by the folder.
+
+### Metadata Folder Schemas
+
+* Under **Tools** > **Assets** > **Folder Metadata Schemas** a new schema has been created: **ScreensAssetProcessing**. This allows authors to apply a channel to a folder so that it will get processed by the workflow.
+* You can apply this metadata schema to new folders:
+
+    ![Apply to folders](docs/images/apply-folder-metadata.png)
 
 ### Demo Folders
 

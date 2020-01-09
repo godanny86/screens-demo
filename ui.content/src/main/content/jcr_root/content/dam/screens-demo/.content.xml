@@ -13,5 +13,4 @@
             jcr:primaryType="nt:unstructured"
             screen-channel="/content/screens/we-retail/channels/idle"/>
     </jcr:content>
-    <asset.jpg/>
 </jcr:root>
