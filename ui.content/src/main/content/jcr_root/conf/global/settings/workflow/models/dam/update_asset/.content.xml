@@ -2,7 +2,7 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
-        cq:lastModified="{Date}2019-12-04T16:57:24.959-08:00"
+        cq:lastModified="{Date}2020-01-08T16:12:12.010-08:00"
         cq:lastModifiedBy="admin"
         cq:tags="[workflow:dam,workflow:wcm]"
         cq:template="/libs/cq/workflow/templates/model"
@@ -179,6 +179,19 @@
                     PROCESS_AUTO_ADVANCE="true"
                     timeout="3600"/>
             </scene7upload>
+            <container
+                jcr:created="{Date}2019-12-04T16:56:33.831-08:00"
+                jcr:createdBy="admin"
+                jcr:description="Kicks off a sub workflow for Screens Asset Processing."
+                jcr:lastModified="{Date}2020-01-08T15:53:56.561-08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Screens Demo Asset Processing"
+                sling:resourceType="cq/workflow/components/model/container">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    CONTAINER="/var/workflow/models/screens-demo-asset-processing"/>
+            </container>
             <thumbnailprocess
                 jcr:created="{Date}2014-07-15T00:55:55.869+05:30"
                 jcr:createdBy="admin"
@@ -232,19 +245,6 @@
                     PROCESS="com.day.cq.dam.pim.impl.sourcing.upload.process.ProductAssetsUploadProcess"
                     PROCESS_AUTO_ADVANCE="true"/>
             </productassetuploadprocess>
-            <container
-                jcr:created="{Date}2019-12-04T16:56:33.831-08:00"
-                jcr:createdBy="admin"
-                jcr:description="Kicks off a sub workflow for Screens Asset Processing."
-                jcr:lastModified="{Date}2019-12-04T16:57:24.950-08:00"
-                jcr:lastModifiedBy="admin"
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Screens Asset Processing"
-                sling:resourceType="cq/workflow/components/model/container">
-                <metaData
-                    jcr:primaryType="nt:unstructured"
-                    CONTAINER="/var/workflow/models/screens-asset-processing"/>
-            </container>
             <damupdateassetworkflowcompletedprocess
                 jcr:description="This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed"
                 jcr:primaryType="nt:unstructured"

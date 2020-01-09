@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:designPath="/libs/settings/wcm/designs/default"
+        cq:lastModified="{Date}2020-01-08T16:15:04.542-08:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/workflow/templates/model"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Screens Demo Asset Processing"
+        sling:resourceType="cq/workflow/components/pages/model">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <process
+                jcr:created="{Date}2020-01-08T14:58:48.792-08:00"
+                jcr:createdBy="admin"
+                jcr:description="Determines if the current asset's folder is marked to be processed and added to a screens channel."
+                jcr:lastModified="{Date}2020-01-08T15:53:17.754-08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Screens Asset Processing Check"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.adobe.aem.guides.screens.demo.core.workflow.impl.AssetProcessingCheck"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process>
+            <or
+                jcr:created="{Date}2020-01-08T15:55:59.696-08:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-01-08T16:09:45.109-08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Is Screen Channel set?"
+                sling:resourceType="cq/workflow/components/model/or"
+                branches="2"
+                branchName1="Branch 1"
+                branchName2="Branch 2"
+                branchOrder="[0,1]"
+                orSplit="true"
+                script1="/* Return true if screen-channel found */&#xd;&#xa;function check() {&#xd;&#xa;    var screensChannel  = workflowData.getMetaDataMap().get(&quot;screen-channel&quot;, &quot;&quot;);&#xd;&#xa;    if(screensChannel != &quot;&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    } else {&#xd;&#xa;        return false;&#xd;&#xa;    }&#xd;&#xa;}"
+                script2="/* Return true if screen-channel found */&#xd;&#xa;function check() {&#xd;&#xa;    var screensChannel  = workflowData.getMetaDataMap().get(&quot;screen-channel&quot;, &quot;&quot;);&#xd;&#xa;    if(screensChannel != &quot;&quot;) {&#xd;&#xa;        return false;&#xd;&#xa;    } else {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;}">
+                <_x0031_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <watermarkprocess
+                        jcr:created="{Date}2020-01-08T16:05:00.926-08:00"
+                        jcr:createdBy="admin"
+                        jcr:description="A process to add a watermark to an asset. Provides various configuration arguments."
+                        jcr:lastModified="{Date}2020-01-08T16:15:04.537-08:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Add Watermark"
+                        sling:resourceType="dam/components/workflow/watermarkprocess">
+                        <metaData
+                            jcr:lastModified="{Date}2020-01-08T16:15:04.537-08:00"
+                            jcr:lastModifiedBy="admin"
+                            jcr:primaryType="nt:unstructured"
+                            color="#111111"
+                            opacity="100"
+                            position="CENTER"
+                            PROCESS="com.day.cq.dam.core.process.WaterMarkProcess"
+                            PROCESS_AUTO_ADVANCE="true"
+                            size="40"
+                            text="Powered by AEM Screens"/>
+                    </watermarkprocess>
+                    <process
+                        jcr:created="{Date}2020-01-08T16:04:23.578-08:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2020-01-08T16:06:05.084-08:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Add Asset to Screens Channel"
+                        sling:resourceType="cq/workflow/components/model/process">
+                        <metaData
+                            jcr:primaryType="nt:unstructured"
+                            PROCESS="com.adobe.aem.guides.screens.demo.core.workflow.impl.AddAssetToChannel"
+                            PROCESS_AUTO_ADVANCE="true"/>
+                    </process>
+                </_x0031_>
+                <_x0032_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <noopprocess
+                        jcr:created="{Date}2020-01-08T16:05:26.858-08:00"
+                        jcr:createdBy="admin"
+                        jcr:description="Screens channel not set. No operations performed."
+                        jcr:lastModified="{Date}2020-01-08T16:06:08.835-08:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Screens Channel Not set"
+                        sling:resourceType="cq/workflow/components/workflow/noopprocess">
+                        <metaData
+                            jcr:primaryType="nt:unstructured"
+                            PROCESS="/libs/workflow/scripts/noop.ecma"
+                            PROCESS_AUTO_ADVANCE="true"/>
+                    </noopprocess>
+                </_x0032_>
+            </or>
+        </flow>
+    </jcr:content>
+</jcr:root>
