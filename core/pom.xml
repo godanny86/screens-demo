@@ -20,12 +20,12 @@
     <parent>
         <groupId>com.adobe.aem.guides</groupId>
         <artifactId>screens-demo</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>screens-demo.core</artifactId>
-    <name>screens-demo - Core</name>
-    <description>Core bundle for screens-demo</description>
+    <name>Screens Demo - Core</name>
+    <description>Core bundle for Screens Demo</description>
     <build>
         <plugins>
             <plugin>
@@ -43,11 +43,7 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-Bundle-Category: screens-demo
--exportcontents: ${packages;VERSIONED}
-Sling-Model-Packages: com.adobe.aem.guides.screens.demo.core.models
--snapshot: ${tstamp;yyyyMMddHHmmssSSS}
-Bundle-DocURL:
+Import-Package: javax.annotation;version=0.0.0,*
                                 ]]></bnd>
                         </configuration>
                     </execution>
@@ -86,10 +82,9 @@ Bundle-DocURL:
 
     <dependencies>
         <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.scr.annotations</artifactId>
-                <version>1.12.0</version>
-                <scope>provided</scope>
+            <groupId>uk.org.lidalia</groupId>
+            <artifactId>slf4j-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
@@ -132,6 +127,10 @@ Bundle-DocURL:
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.resource</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.util.tracker</artifactId>
+        </dependency>
         <!-- Other Dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -146,14 +145,28 @@ Bundle-DocURL:
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.servlets.annotations</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
-            <classifier>apis</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.cq</groupId>
+            <artifactId>core.wcm.components.core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.models.api</artifactId>
         </dependency>
+
+
+        <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -172,14 +185,29 @@ Bundle-DocURL:
         <dependency>
             <groupId>junit-addons</groupId>
             <artifactId>junit-addons</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.wcm</groupId>
             <artifactId>io.wcm.testing.aem-mock.junit5</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>org.apache.sling.models.impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
         </dependency>
+        <!-- Required to be able to support injection with @Self and @Via -->
         <dependency>
-            <groupId>uk.org.lidalia</groupId>
-            <artifactId>slf4j-test</artifactId>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.models.impl</artifactId>
+            <version>1.4.4</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
