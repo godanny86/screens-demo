@@ -49,7 +49,7 @@ import java.util.Map;
 @Component(service = { WorkflowProcess.class }, property = { "process.label=Screens Add Asset to Channel",
         Constants.SERVICE_DESCRIPTION + "=AEM Screens Process Step to add to channel" })
 public class AddAssetToChannel implements WorkflowProcess {
-    private static final Logger log = LoggerFactory.getLogger(AssetProcessingCheck.class);
+    private static final Logger log = LoggerFactory.getLogger(AddAssetToChannel.class);
 
     @Reference
     ResourceResolverFactory resourceResolverFactory;
@@ -81,6 +81,7 @@ public class AddAssetToChannel implements WorkflowProcess {
     public final void execute(final WorkItem workItem, final WorkflowSession workflowSession, final MetaDataMap args)
             throws WorkflowException {
 
+        log.info("We heare yo!");
         /* Get data set in prior Workflow Steps */
         final String screensChannelPath = this.getPersistedData(workItem, WF_SCREENS_CHANNEL_PATH, String.class);
         final String assetPath = this.getPersistedData(workItem, WF_ASSET_PATH, String.class);
@@ -101,6 +102,9 @@ public class AddAssetToChannel implements WorkflowProcess {
             final Resource assetResource = resourceResolver.getResource(assetPath);
             final Page screensChannel = pageManager.getPage(screensChannelPath);
 
+            log.debug("Asset Path: {}", assetPath);
+            log.info("Channel path: {}", screensChannelPath);
+
             // Assume Workflow Item is the original rendition for the DAM Asset
             if (DamUtil.isAsset(assetResource) && screensChannel != null) {
                 final Resource channelParsys = screensChannel.getContentResource(CHANNEL_PARSYS);
@@ -112,7 +116,8 @@ public class AddAssetToChannel implements WorkflowProcess {
                 }
 
             } else {
-                log.debug("Could not determine asset and screens channel");
+                log.debug("Could not resolve the asset or screens channel.");
+                throw new WorkflowException("Could not resolve the asset or screens channel.");
             }
 
             if (resourceResolver.isLive() && resourceResolver.hasChanges()) {
