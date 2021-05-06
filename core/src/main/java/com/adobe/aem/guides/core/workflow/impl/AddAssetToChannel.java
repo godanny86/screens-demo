@@ -81,7 +81,6 @@ public class AddAssetToChannel implements WorkflowProcess {
     public final void execute(final WorkItem workItem, final WorkflowSession workflowSession, final MetaDataMap args)
             throws WorkflowException {
 
-        log.info("We heare yo!");
         /* Get data set in prior Workflow Steps */
         final String screensChannelPath = this.getPersistedData(workItem, WF_SCREENS_CHANNEL_PATH, String.class);
         final String assetPath = this.getPersistedData(workItem, WF_ASSET_PATH, String.class);
